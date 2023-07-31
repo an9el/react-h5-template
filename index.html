@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+  <meta name="format-detection" content="telephone=yes" />
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <title></title>
+</head>
+
+<body style="margin: 0">
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <script src="//deepinnet-business-public.oss-cn-hangzhou.aliyuncs.com/frontResources/vconsole.min.js"></script>
+  <script>
+    window.onload = () => {
+      if (location.hash.substring(1) === 'debugger') {
+        var vConsole = new window.VConsole()
+      }
+
+      // 禁用双指放大
+      document.documentElement.addEventListener(
+        'touchstart',
+        function (event) {
+          if (event.touches.length > 1) {
+            event.preventDefault()
+          }
+        },
+        {
+          passive: false,
+        }
+      )
+      document.addEventListener('gesturestart', function (event) {
+        event.preventDefault()
+      })
+
+      // 禁用双击放大
+      var lastTouchEnd = 0
+      document.documentElement.addEventListener(
+        'touchend',
+        function (event) {
+          var now = Date.now()
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault()
+          }
+          lastTouchEnd = now
+        },
+        {
+          passive: false,
+        }
+      )
+    }
+  </script>
+</body>
+
+</html>
